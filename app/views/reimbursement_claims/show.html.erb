@@ -1,0 +1,23 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="text-center">Reimbursement Claim Details</h2>
+  </div>
+  <div class="card-body">
+    <p><strong>Purpose:</strong> <%= @reimbursement_claim.purpose %></p>
+    <p><strong>Amount:</strong>Rs.<%= @reimbursement_claim.amount.to_i %></p>
+    <p><strong>Date of Expenditure:</strong> <%= @reimbursement_claim.date_of_expenditure %></p>
+    <p><strong>Employee:</strong> <%= @reimbursement_claim.employee.name %></p>
+    <p><strong>Receipt:</strong> 
+      <% if @reimbursement_claim.receipt.attached? %>
+        <%= link_to 'View Receipt', url_for(@reimbursement_claim.receipt),target: "blank" %>
+      <% else %>
+        No Receipt
+      <% end %>
+    </p>
+  </div>
+  <div class="card-footer">
+    <%= link_to 'Edit', edit_reimbursement_claim_path(@reimbursement_claim), class: "btn btn-warning" %>
+    <%= link_to 'Back', reimbursement_claims_path, class: "btn btn-secondary" %>
+  </div>
+</div>
+

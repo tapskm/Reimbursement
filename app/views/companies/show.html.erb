@@ -1,0 +1,15 @@
+<div class="card">
+  <div class="card-header">
+    <h2><%= @company.name %></h2>
+  </div>
+  <div class="card-body">
+    <p><strong>Employee Count:</strong> <%= @company.employees.count %></p>
+    <p><strong>Total Reimbursements:</strong> Rs.<%=@company.reimbursement_claims.sum(:amount).to_i %></p>
+  </div>
+  <div class="card-footer">
+    <%= link_to 'Edit', edit_company_path(@company), class: "btn btn-warning" %>
+    <%= link_to 'Back', companies_path, class: "btn btn-secondary" %>
+  </div>
+</div>
+<%= link_to 'Add Employee', new_employee_path(company_id: @company.id), class: "btn btn-success mt-3" %>
+

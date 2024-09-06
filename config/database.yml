@@ -1,0 +1,40 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: your_mysql_username
+  password: your_mysql_password
+  host: localhost
+
+development:
+  <<: *default
+  database: reimbursement_portal_development
+
+test:
+  <<: *default
+  database: reimbursement_portal_test
+
+production:
+  <<: *default
+  database: reimbursement_portal_production
+  username: reimbursement_portal
+  password: <%= ENV['REIMBURSEMENT_PORTAL_DATABASE_PASSWORD'] %>
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password: bitlasoft
+  host: localhost
+
+development:
+  <<: *default
+  database: reimbursement_portal
+
+test:
+  <<: *default
+  database: reimbursement_portal
+
+production:
+  <<: *default
+  database: reimbursement_portal

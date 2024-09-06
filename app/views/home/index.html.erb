@@ -1,0 +1,84 @@
+  
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .dashboard-container {
+      padding: 40px 0;
+    }
+    .card-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .card {
+      width: 300px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .count-display {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .btn-container {
+      margin-top: 20px;
+    }
+  </style>
+
+  <div class="container">
+    <h1 class="text-center mt-5">Reimbursement Portal Dashboard</h1>
+    
+    <div class="dashboard-container">
+      <div class="card-container row text-center">
+        
+        <div class="col-md-4">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">Employees</h5>
+              <div class="count-display"><%=@employee_count%></div> <!-- Replace with dynamic count -->
+              <div class="btn-container">
+                <a href="/employees" class="btn btn-primary btn-block">Manage Employees</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">Companies</h5>
+              <div class="count-display"><%=@company_count%></div> <!-- Replace with dynamic count -->
+              <div class="btn-container">
+                <a href="/companies" class="btn btn-success btn-block">Manage Companies</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">Reimbursements</h5>
+              <div class="count-display"><%=@reimburse_count%></div> <!-- Replace with dynamic count -->
+              <div class="btn-container">
+                <a href="/reimbursement_claims" class="btn btn-danger btn-block">Manage Claims</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+

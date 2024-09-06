@@ -1,0 +1,39 @@
+<h1>Reimbursement Claims</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Purpose</th>
+      <th>Amount</th>
+      <th>Date of Expenditure</th>
+      <th>Employee</th>
+      <th>Receipt</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reimbursement_claims.each do |claim| %>
+      <tr>
+        <td><%= claim.purpose %></td>
+        <td>Rs.<%= claim.amount.to_i %></td>
+        <td><%= claim.date_of_expenditure %></td>
+        <td><%= claim.employee.name %></td>
+        <td>
+          <% if claim.receipt.attached? %>
+            <%= link_to 'View Receipt', rails_blob_path(claim.receipt, disposition: 'inline'), target: '_blank'%>
+          <% else %>
+            No Receipt
+          <% end %>
+        </td>
+        <td>
+          <%= link_to 'Show', reimbursement_claim_path(claim), class: "btn btn-sm btn-primary" %> |
+          <%= link_to 'Edit', edit_reimbursement_claim_path(claim), class: "btn btn-sm btn-warning" %> |
+          <%= link_to 'Delete', claim, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Reimbursement Claim', new_reimbursement_claim_path, class: "btn btn-success" %>
+

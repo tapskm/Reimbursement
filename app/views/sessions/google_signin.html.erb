@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google Sign-In</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= csrf_meta_tags %>
+
+  <!-- Load Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- Load the Google API Client Library -->
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+  <!-- Set the Google client ID -->
+  <meta name="google-signin-client_id" content="879331545141-5d90p5hqvs510aq65ucn62o702mdmcdo.apps.googleusercontent.com">
+  
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .signin-container {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .g-signin2 {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="signin-container">
+    <h1 class="h3 mb-3 font-weight-normal ">Reimbursement Portal</h1>
+    <!-- Google Sign-In Button -->
+    <div class="d-flex justify-content-center">
+      <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+    </div>
+  </div>
+<div id="error-message" class="alert alert-danger" style="display: none;"></div>
+
+<script>
+  function onSignIn(googleUser) {
+    var id_token = googleUser.getAuthResponse().id_token;
+
+    fetch('/sessions/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      },
+      body: JSON.stringify({ token: id_token })
+    }).then(function(response) {
+      if (response.ok) {
+        window.location.href = '/';
+      } else {
+        document.getElementById('error-message').innerText = 'Failed to authenticate. Please try again.';
+        document.getElementById('error-message').style.display = 'block';
+      }
+    }).catch(function(error) {
+      console.error('Error:', error);
+      document.getElementById('error-message').innerText = 'An error occurred. Please try again later.';
+      document.getElementById('error-message').style.display = 'block';
+    });
+  }
+</script>
+</body>
+</html>
+
